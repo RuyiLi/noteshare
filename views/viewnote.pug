@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    div(class="columns")
+        div(class="column")
+        div(class="column is-three-fifths")
+            div(class="box has-background-dark")
+                h1(class="title") #{note.title}
+                h2(class="subtitle") By #{note.author.username}
+                strong(class="is-size-7 has-text-light") Created at #{note.createdAt.toLocaleString()}
+                div(class="field")
+                    div(class="control")
+                        textarea(class="textarea" disabled) #{note.text}
+        div(class="column")

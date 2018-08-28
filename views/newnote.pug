@@ -1,0 +1,36 @@
+extends layout
+
+block content
+    div(class="box")
+        div(class="field")
+            label(class="label") Title
+                input(class="input" type="text" placeholder="Title...")
+        div(class="field")
+            label(class="label") Note
+                textarea(class="textarea" placeholder="Your note's content goes here..." maxlength="500")
+        p(id="error" class="has-text-danger")
+        a(class="button is-success is-outlined" href="javascript:create()") Submit
+        script. 
+            var $ = document.querySelector.bind(document);
+            var error = $('#error');
+            function err(msg){
+                error.innerHTML = msg;
+            }
+
+            function create(){
+                var title = $('input').value;
+                var text = $('textarea').value;
+                if(!title.replace(/\s/g, '')) return err('Title must not be empty.');
+                if(!text.replace(/\s/g, '')) return err('Note content must not be empty.');
+                if(text.length > 500) return err('Note content must not exceed 500 characters.');
+                var x = new XMLHttpRequest();
+                x.onreadystatechange = function(){
+                    if(x.readyState === 4 && x.status === 200){
+                        console.log('pog');
+                        window.location.replace("http://noteshare.now.sh/notes/");
+                    }
+                }
+                x.open("POST", "/notes/new");
+                x.setRequestHeader("Content-Type", "application/json");
+                x.send(JSON.stringify({ title, text }));
+            }

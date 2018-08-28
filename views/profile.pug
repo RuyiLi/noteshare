@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    div(class="columns")
+        div(class="column")
+        div(class="column is-three-fifths")
+            div(class="box")
+                article(class="media")
+                    div(class="media-left")
+                        figure(class="image is-64x64")
+                            img(src=`${user.profilePic}`)
+                    div(class="media-content")
+                        div(class="content")
+                            strong(class="is-size-4") #{user.username}
+                            hr(class="is-marginless" style="margin-bottom:.7rem!important;")
+                            p(style="word-break:break-all!important;") #{user.notes.join('\n')}
+        div(class="column")

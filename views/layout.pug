@@ -1,0 +1,41 @@
+html(lang=en_US)
+    head
+        meta(charset="utf-8")
+        meta(name="viewport content" content="width=device-width, initial-scale=1")
+        title Noteshare - #{title}
+        meta(name="author" content="Ruyi Li")
+        meta(name="description" content="A web app to store and share notes.")
+        meta(name="og:type" content="website")
+        meta(name="og:title" content="Noteshare - #{title}")
+        meta(name="og:description" content="Noteshare is an app to store and share notes easily online.")
+        
+        //link(rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:100,300")
+        link(type="text/css" rel="stylesheet" href="/css/bulma.min.css")
+        link(type="text/css" rel="stylesheet" href="/css/style.css")
+    body(class="has-navbar-fixed-top")
+        nav(class="navbar is-fixed-top is-light")
+            div(class="navbar-menu")
+                div(class="navbar-start")
+                    a(class="navbar-item" href="/") Home
+                div(class="navbar-end")
+                    if user
+                        a(class="navbar-item" href="/notes") All Notes
+                        div(class="navbar-item")
+                            div(class="field")
+                                p(class="control")
+                                    a(class="button is-info" href="/notes/new") New Note 
+
+                    div(class="navbar-item has-dropdown is-hoverable")
+                        a(class="navbar-link" href=`${user?'#':'/auth/login'}`) User
+                        div(class="navbar-dropdown")
+                            if user
+                                a(class="navbar-item" href="/notes/new") New note
+                                a(class="navbar-item" href="/profile") Profile
+                                hr(class="navbar-divider")
+                                a(class="navbar-item" href="/auth/logout") Log out
+                            else
+                                a(class="navbar-item" href="/auth/login") Log in
+        section(class="hero is-fullheight is-dark is-bold")
+            div(class="hero-body")
+                div(class="container")
+                    block content

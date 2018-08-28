@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    div(class="columns")
+        div(class="column")
+        div(class="column is-four-fifths")
+            div(class="box")    
+                h1(class="title has-text-dark") Newest notes
+                each val in notes
+                    div(class="box")
+                        div(class="level")  
+                            div(class="level-left" style="width:70%!important;")
+                                div(class="level-item" style="width:100%!important;")
+                                    a(class="title has-text-dark" href=`/notes/view/${val._id}` style="width:100%!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;") #{val.title}
+                            div(class="level-right" style="width:20%;")
+                                div(class="level-item")
+                                    div
+                                        div
+                                            p by <strong>#{val.author.username}</strong>
+                                        div
+                                            p(class="is-size-7") created at
+                                            strong(class="is-size-7")  #{val.createdAt.toLocaleString()}
+                        
+                        hr
+                        p(style="word-break:break-all!important;") #{val.text}
+                                    
+                else
+                    p There are no notes currently.
+                    a(href="/notes/new") Click here to make your own!
+        div(class="column")
